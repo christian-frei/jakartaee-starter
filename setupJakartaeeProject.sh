@@ -30,10 +30,21 @@ cp $scriptPath/test_pom.xml $artifactId/$artifactId-st/pom.xml
 cp $scriptPath/PingResourceClient.java $artifactId/$artifactId-st/src/test/java/$groupId/service/ping/boundary
 cp $scriptPath/PingResourceIT.java $artifactId/$artifactId-st/src/test/java/$groupId/service/ping/boundary
 
-find . -name '*.java' -print0 | xargs -0 sed -i "" "s/\[artifactId\]/$artifactId/g"
-find . -name '*.java' -print0 | xargs -0 sed -i "" "s/\[groupId\]/$groupId/g"
-find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[artifactId\]/$artifactId/g"
-find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[groupId\]/$groupId/g"
+# determine OS
+UNAME=$(uname)
+if [[ "$UNAME" == "Linux" || "$UNAME" == "Darwin" ]] ; then
+  find . -name '*.java' -print0 | xargs -0 sed -i "" "s/\[artifactId\]/$artifactId/g"
+  find . -name '*.java' -print0 | xargs -0 sed -i "" "s/\[groupId\]/$groupId/g"
+  find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[artifactId\]/$artifactId/g"
+  find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[groupId\]/$groupId/g"
+elif [[ "$UNAME" == CYGWIN* || "$UNAME" == MINGW* ]] ; then
+  # windows 10 gitbash
+  # find . -type f -name "*.nfo" -exec sed -i'' -e 's/2019/2018/g' {} +
+  find . -type f -name "*.java"  -exec sed -i'' -e 's/\[artifactId\]/$artifactId/g' {} +
+  find . -type f -name "*.java"  -exec sed -i'' -e 's/\[groupId\]/$groupId/g'       {} +
+  find . -type f -name "*.xml"   -exec sed -i'' -e 's/\[artifactId\]/$artifactId/g' {} +
+  find . -type f -name "*.xml"   -exec sed -i'' -e 's/\[groupId\]/$groupId/g'       {} +
+fi
 
 echo "JakartaEE/microprofile project $groupId.$artifactId created."
 exit 0
