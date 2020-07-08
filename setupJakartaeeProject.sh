@@ -39,11 +39,10 @@ if [[ "$UNAME" == "Linux" || "$UNAME" == "Darwin" ]] ; then
   find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[groupId\]/$groupId/g"
 elif [[ "$UNAME" == CYGWIN* || "$UNAME" == MINGW* ]] ; then
   # windows 10 gitbash
-  # find . -type f -name "*.nfo" -exec sed -i'' -e 's/2019/2018/g' {} +
-  find . -type f -name "*.java"  -exec sed -i'' -e 's/\[artifactId\]/$artifactId/g' {} +
-  find . -type f -name "*.java"  -exec sed -i'' -e 's/\[groupId\]/$groupId/g'       {} +
-  find . -type f -name "*.xml"   -exec sed -i'' -e 's/\[artifactId\]/$artifactId/g' {} +
-  find . -type f -name "*.xml"   -exec sed -i'' -e 's/\[groupId\]/$groupId/g'       {} +
+  find . -type f -name "*.java"  -exec sed -i'' -e "s/\[artifactId\]/$artifactId/g" {} +
+  find . -type f -name "*.java"  -exec sed -i'' -e "s/\[groupId\]/$groupId/g"       {} +
+  find . -type f -name "*.xml"   -exec sed -i'' -e "s/\[artifactId\]/$artifactId/g" {} +
+  find . -type f -name "*.xml"   -exec sed -i'' -e "s/\[groupId\]/$groupId/g"       {} +
 fi
 
 echo "JakartaEE/microprofile project $groupId.$artifactId created."
