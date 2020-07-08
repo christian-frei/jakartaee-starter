@@ -1,4 +1,4 @@
-package [groupId].service.ping.boundary;
+package testgroup.service.ping.boundary;
 import java.net.URI;
 import javax.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.RestClientBuilder;
@@ -14,7 +14,7 @@ public class PingResourceIT {
 
     @BeforeEach
     public void init() {
-        URI uri = URI.create("http://localhost:8080/[artifactId]/resources/");
+        URI uri = URI.create("http://localhost:8080/micro/resources/");
         this.client = RestClientBuilder.
                 newBuilder().
                 baseUri(uri).

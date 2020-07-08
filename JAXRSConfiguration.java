@@ -1,4 +1,4 @@
-package [groupId].service;
+package testgroup.service;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

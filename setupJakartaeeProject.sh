@@ -9,6 +9,10 @@ groupId="$2"
 echo "artifactId=$artifactId groupId=$groupId"
 scriptPath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# parent
+mkdir $artifactId
+cp $scriptPath/parent_pom.xml $artifactId/pom.xml
+
 # main
 mkdir -p $artifactId/$artifactId/src/main
 mkdir -p $artifactId/$artifactId/src/main/java/$groupId/service/ping/boundary
@@ -33,10 +37,10 @@ cp $scriptPath/PingResourceIT.java $artifactId/$artifactId-st/src/test/java/$gro
 # determine OS
 UNAME=$(uname)
 if [[ "$UNAME" == "Linux" || "$UNAME" == "Darwin" ]] ; then
-  find . -name '*.java' -print0 | xargs -0 sed -i "" "s/\[artifactId\]/$artifactId/g"
-  find . -name '*.java' -print0 | xargs -0 sed -i "" "s/\[groupId\]/$groupId/g"
-  find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[artifactId\]/$artifactId/g"
-  find . -name '*.xml' -print0 | xargs -0 sed -i  "" "s/\[groupId\]/$groupId/g"
+  find . -name '*.java' -print0 | xargs -0 sed -i'' "s/\[artifactId\]/$artifactId/g"
+  find . -name '*.java' -print0 | xargs -0 sed -i'' "s/\[groupId\]/$groupId/g"
+  find . -name '*.xml' -print0 | xargs -0 sed -i'' "s/\[artifactId\]/$artifactId/g"
+  find . -name '*.xml' -print0 | xargs -0 sed -i'' "s/\[groupId\]/$groupId/g"
 elif [[ "$UNAME" == CYGWIN* || "$UNAME" == MINGW* ]] ; then
   # windows 10 gitbash
   find . -type f -name "*.java"  -exec sed -i'' -e "s/\[artifactId\]/$artifactId/g" {} +

@@ -1,4 +1,4 @@
-package [groupId].service.ping.boundary;
+package testgroup.service.ping.boundary;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
